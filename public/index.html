@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calzone - Fix Outlook Calendar Wrong Timezone in Google Calendar</title>
+
+  <!-- Open Graph / Social Media Preview -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Calzone - Fix Outlook Calendar Wrong Timezone in Google Calendar">
+  <meta property="og:description" content="Outlook calendar showing UTC or wrong timezone in Google Calendar? Events shifted hours off? Calzone is a free proxy that fixes Outlook ICS timezone issues automatically.">
+  <meta property="og:image" content="https://calzone.mooracle.io/og.png">
+  <meta property="og:url" content="https://calzone.mooracle.io">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Calzone - Fix Outlook Calendar Wrong Timezone in Google Calendar">
+  <meta name="twitter:description" content="Outlook calendar showing UTC or wrong timezone in Google Calendar? Events shifted hours off? Calzone is a free proxy that fixes Outlook ICS timezone issues automatically.">
+  <meta name="twitter:image" content="https://calzone.mooracle.io/og.png">
+
+  <meta name="description" content="Outlook calendar showing UTC or wrong timezone in Google Calendar? Events shifted hours off? Calzone is a free proxy that fixes Outlook ICS timezone issues automatically.">
+
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" href="/logo.webp" type="image/webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(160deg, #0f1523 0%, #1a1a2e 40%, #1e2640 100%);
+      color: #f0f0f0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Hero */
+    .hero {
+      text-align: center;
+      padding: 80px 24px 60px;
+      max-width: 760px;
+    }
+    .hero-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+    .hero-logo img {
+      width: 56px;
+      height: 56px;
+      object-fit: contain;
+    }
+    .hero-logo span {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    .hero h1 {
+      font-size: 2.75rem;
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -1px;
+      margin-bottom: 24px;
+    }
+    .hero h1 .accent {
+      color: #f4a261;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      color: #a0aab4;
+      line-height: 1.6;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    /* Steps */
+    .steps-section {
+      width: 100%;
+      max-width: 860px;
+      padding: 0 24px 60px;
+    }
+    .steps-section h2 {
+      text-align: center;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: #f4a261;
+      margin-bottom: 36px;
+    }
+    .steps-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 20px;
+    }
+    .step-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 32px 24px;
+      text-align: center;
+      transition: border-color 0.3s;
+    }
+    .step-card:hover {
+      border-color: rgba(244,162,97,0.3);
+    }
+    .step-number {
+      width: 40px;
+      height: 40px;
+      background: #f4a261;
+      color: #1a1a2e;
+      border-radius: 50%;
+      font-size: 1rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .step-card h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .step-card p {
+      font-size: 0.9rem;
+      color: #8a94a0;
+      line-height: 1.5;
+    }
+
+    /* Converter */
+    .converter-section {
+      width: 100%;
+      max-width: 680px;
+      padding: 0 24px 60px;
+    }
+    .converter-section h2 {
+      text-align: center;
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      color: #f4a261;
+      margin-bottom: 36px;
+    }
+    .converter {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 32px;
+    }
+    .converter label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #8a94a0;
+      margin-bottom: 10px;
+    }
+    .converter input {
+      width: 100%;
+      background: #0d1117;
+      border: 1px solid #30363d;
+      border-radius: 10px;
+      padding: 16px;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.85rem;
+      color: #f0f0f0;
+      margin-bottom: 20px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .converter input:focus {
+      border-color: #f4a261;
+    }
+    .converter input::placeholder {
+      color: #6e7681;
+    }
+    .output-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #0d1117;
+      border: 1px solid #30363d;
+      border-radius: 10px;
+      padding: 16px;
+      min-height: 52px;
+    }
+    .output-wrapper.success {
+      border-color: #7ee787;
+    }
+    #output {
+      flex: 1;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.85rem;
+      color: #7ee787;
+      word-break: break-all;
+    }
+    #output.placeholder {
+      color: #6e7681;
+    }
+    #output.error {
+      color: #f85149;
+    }
+    .copy-btn {
+      background: #f4a261;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      color: #1a1a2e;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .copy-btn:hover {
+      background: #e76f51;
+    }
+    .copy-btn:disabled {
+      background: #30363d;
+      color: #6e7681;
+      cursor: not-allowed;
+    }
+    .copy-btn.copied {
+      background: #7ee787;
+    }
+
+    /* Google Calendar instructions */
+    .gcal-steps {
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .gcal-steps p {
+      font-size: 0.85rem;
+      color: #6e7681;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+    .gcal-steps ol {
+      list-style: none;
+      counter-reset: gcal;
+      padding: 0;
+    }
+    .gcal-steps ol li {
+      counter-increment: gcal;
+      font-size: 0.85rem;
+      color: #8a94a0;
+      padding: 4px 0 4px 28px;
+      position: relative;
+    }
+    .gcal-steps ol li::before {
+      content: counter(gcal) ".";
+      position: absolute;
+      left: 0;
+      color: #6e7681;
+      font-weight: 500;
+    }
+
+    /* Trust bar */
+    .trust-bar {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 32px;
+      padding: 40px 24px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      width: 100%;
+      max-width: 860px;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      color: #6e7681;
+      font-weight: 500;
+    }
+    .trust-item svg {
+      width: 18px;
+      height: 18px;
+      fill: #4a5568;
+    }
+
+    /* Deploy section */
+    .deploy-section {
+      text-align: center;
+      padding: 40px 24px 80px;
+    }
+    .deploy-section p {
+      font-size: 1rem;
+      color: #8a94a0;
+      margin-bottom: 20px;
+    }
+    .deploy-section a img {
+      transition: opacity 0.2s;
+    }
+    .deploy-section a img:hover {
+      opacity: 0.85;
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 32px 24px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      width: 100%;
+      font-size: 0.85rem;
+      color: #4a5568;
+    }
+    .footer a {
+      color: #f4a261;
+      text-decoration: none;
+    }
+    .footer a:hover {
+      text-decoration: underline;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 12px;
+    }
+    .footer-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .footer-links svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    /* Mobile */
+    @media (max-width: 640px) {
+      .hero {
+        padding: 60px 20px 40px;
+      }
+      .hero h1 {
+        font-size: 1.85rem;
+      }
+      .hero p {
+        font-size: 1rem;
+      }
+      .steps-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+      .step-card {
+        padding: 24px 20px;
+      }
+      .converter {
+        padding: 24px 20px;
+      }
+      .trust-bar {
+        gap: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="hero-logo">
+      <img src="/logo.webp" alt="Calzone logo">
+      <span>Calzone</span>
+    </div>
+    <h1>Outlook calendar showing <span class="accent">wrong timezone</span> in Google Calendar?</h1>
+    <p>Outlook ICS feeds use Windows timezone names like "Romance Standard Time" that Google Calendar doesn't recognize — defaulting to UTC and shifting your events hours off. Calzone is a live proxy that converts them to standard IANA timezones automatically, keeping your calendar in sync with the correct times.</p>
+  </div>
+
+  <!-- How it works -->
+  <div class="steps-section">
+    <h2>How it works</h2>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <h3>Paste your URL</h3>
+        <p>Copy your Outlook calendar subscription URL</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <h3>We fix it live</h3>
+        <p>Calzone sits between Outlook and Google, converting Windows timezone names to IANA on every sync</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <h3>Always in sync</h3>
+        <p>Subscribe in Google Calendar &mdash; recurring events, DST changes, and new events always show the correct time</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Converter -->
+  <div class="converter-section">
+    <h2>Try it now</h2>
+    <div class="converter">
+      <label>Your Outlook calendar URL</label>
+      <input type="text" id="input" placeholder="https://outlook.office365.com/owa/calendar/..." autocomplete="off">
+      <div class="output-wrapper" id="output-wrapper">
+        <span id="output" class="placeholder">Your fixed URL will appear here</span>
+        <button class="copy-btn" id="copy-btn" disabled>Copy</button>
+      </div>
+      <div class="gcal-steps">
+        <p>Then add to Google Calendar:</p>
+        <ol>
+          <li>Open Google Calendar settings</li>
+          <li>Click "Add calendar" &rarr; "From URL"</li>
+          <li>Paste your fixed URL and click "Add calendar"</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- Trust bar -->
+  <div class="trust-bar">
+    <div class="trust-item">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+      No data stored
+    </div>
+    <div class="trust-item">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/><line x1="2" y1="2" x2="22" y2="22" stroke="#4a5568" stroke-width="2"/></svg>
+      No account needed
+    </div>
+    <div class="trust-item">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+      Open source
+    </div>
+    <div class="trust-item">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96z"/></svg>
+      Powered by Cloudflare
+    </div>
+  </div>
+
+  <!-- Deploy your own -->
+  <div class="deploy-section">
+    <p>Want your own instance? Deploy free on Cloudflare Workers.</p>
+    <a href="https://deploy.workers.cloudflare.com/?url=https://github.com/mooracle/calzone">
+      <img src="https://deploy.workers.cloudflare.com/button" alt="Deploy to Cloudflare Workers"/>
+    </a>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div class="footer-links">
+      <a href="https://github.com/mooracle/calzone">
+        <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        GitHub
+      </a>
+      <a href="https://www.linkedin.com/company/mooracle/">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+    </div>
+    Built by <a href="https://mooracle.io">Mooracle</a>
+  </div>
+
+  <script>
+    const input = document.getElementById('input');
+    const output = document.getElementById('output');
+    const outputWrapper = document.getElementById('output-wrapper');
+    const copyBtn = document.getElementById('copy-btn');
+
+    input.addEventListener('input', () => {
+      const url = input.value.trim();
+
+      if (!url) {
+        output.textContent = 'Your fixed URL will appear here';
+        output.className = 'placeholder';
+        outputWrapper.classList.remove('success');
+        copyBtn.disabled = true;
+        return;
+      }
+
+      if (!url.includes('outlook.office365.com')) {
+        output.textContent = 'Please enter a valid Outlook calendar URL';
+        output.className = 'error';
+        outputWrapper.classList.remove('success');
+        copyBtn.disabled = true;
+        return;
+      }
+
+      const converted = url.replace('outlook.office365.com', window.location.host);
+      output.textContent = converted;
+      output.className = '';
+      outputWrapper.classList.add('success');
+      copyBtn.disabled = false;
+    });
+
+    copyBtn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(output.textContent);
+        copyBtn.textContent = 'Copied!';
+        copyBtn.classList.add('copied');
+        setTimeout(() => {
+          copyBtn.textContent = 'Copy';
+          copyBtn.classList.remove('copied');
+        }, 2000);
+      } catch (err) {
+        copyBtn.textContent = 'Failed';
+        setTimeout(() => copyBtn.textContent = 'Copy', 2000);
+      }
+    });
+  </script>
+</body>
+</html>
