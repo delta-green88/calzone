@@ -50,8 +50,11 @@ export default {
     const res = await fetch(target);
     let text = await res.text();
 
-    text = text.replace(/BEGIN:VEVENT/, buildVtimezone(tzid) + "BEGIN:VEVENT");
+    // Tag the real event timestamps FIRST, while VTIMEZONE hasn't been added yet
     text = text.replace(/^(DTSTART|DTEND):(\d{8}T\d{6})$/gm, `$1;TZID=${tzid}:$2`);
+
+    // THEN inject VTIMEZONE — its own internal DTSTART lines must stay untouched
+    text = text.replace(/BEGIN:VEVENT/, buildVtimezone(tzid) + "BEGIN:VEVENT");
 
     return new Response(text, {
       headers: { "content-type": "text/calendar; charset=utf-8" },
