@@ -25,14 +25,16 @@ END:VTIMEZONE
 }
 
 export default {
-  async fetch(request) {
+  async fetch(request, env) {
     const reqUrl = new URL(request.url);
     const target = reqUrl.searchParams.get("url");
-    const tzid = reqUrl.searchParams.get("tz") || "Europe/Luxembourg";
 
     if (!target) {
-      return new Response("Missing ?url= parameter", { status: 400 });
+      // No ?url= param — serve the normal landing page
+      return env.ASSETS.fetch(request);
     }
+
+    const tzid = reqUrl.searchParams.get("tz") || "Europe/Luxembourg";
 
     let targetHost;
     try {
